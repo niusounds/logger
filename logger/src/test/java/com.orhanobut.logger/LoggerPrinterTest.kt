@@ -1,12 +1,10 @@
 package com.orhanobut.logger
 
+import com.nhaarman.mockitokotlin2.whenever
 import com.orhanobut.logger.Logger.*
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Matchers.any
-import org.mockito.Matchers.contains
-import org.mockito.Matchers.eq
-import org.mockito.Matchers.isNull
+import org.mockito.Matchers.*
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
@@ -14,6 +12,7 @@ import org.mockito.Mockito.never
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.MockitoAnnotations
 import org.mockito.MockitoAnnotations.initMocks
 import java.util.*
 
@@ -25,8 +24,9 @@ class LoggerPrinterTest {
 
   @Before fun setup() {
     initMocks(this)
-    `when`(adapter!!.isLoggable(any(Int::class.java), any(String::class.java))).thenReturn(true)
-    printer.addAdapter(adapter!!)
+    whenever(adapter.isLoggable(anyInt(), anyString())).thenReturn(true)
+    whenever(adapter.isLoggable(anyInt(), nullable(String::class.java))).thenReturn(true)
+    printer.addAdapter(adapter)
   }
 
   @Test fun logDebug() {

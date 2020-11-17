@@ -18,9 +18,10 @@ class LogcatLogStrategyTest {
     logStrategy.log(DEBUG, "tag", "message")
 
     val logItems = ShadowLog.getLogs()
-    assertThat(logItems[0].type).isEqualTo(DEBUG)
-    assertThat(logItems[0].msg).isEqualTo("message")
-    assertThat(logItems[0].tag).isEqualTo("tag")
+    val logItem = logItems.find { it.tag != "MonitoringInstr" }
+    assertThat(logItem?.type).isEqualTo(DEBUG)
+    assertThat(logItem?.msg).isEqualTo("message")
+    assertThat(logItem?.tag).isEqualTo("tag")
   }
 
   @Test fun logWithNullTag() {
@@ -29,7 +30,8 @@ class LogcatLogStrategyTest {
     logStrategy.log(DEBUG, null, "message")
 
     val logItems = ShadowLog.getLogs()
-    assertThat(logItems[0].tag).isEqualTo(LogcatLogStrategy.DEFAULT_TAG)
+    val logItem = logItems.find { it.tag != "MonitoringInstr" }
+    assertThat(logItem?.tag).isEqualTo(LogcatLogStrategy.DEFAULT_TAG)
   }
 
 }

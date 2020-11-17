@@ -30,6 +30,9 @@ build/
 **/.idea/dictionaries
 **/.idea/runConfigurations.xml
 .idea/caches
+.idea/compiler.xml
+/.idea/caches/build_file_checksums.ser
+/.idea/codeStyles/Project.xml
 
 # layout inspector view captures
 captures

@@ -2,11 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+  compileSdkVersion 29
 
   defaultConfig {
-    minSdkVersion rootProject.ext.minSdkVersion
+    minSdkVersion 21
   }
 
   lintOptions {
@@ -20,14 +19,14 @@ android {
 }
 
 dependencies {
-  implementation deps.supportAnnotations
+  implementation "androidx.annotation:annotation:1.1.0"
 
-  testImplementation deps.junit
-  testImplementation deps.truth
-  testImplementation deps.robolectric
-  testImplementation deps.mockito
-  testImplementation deps.json
-  testImplementation deps.kotlin
+  testImplementation 'junit:junit:4.13'
+  testImplementation 'com.google.truth:truth:0.42'
+  testImplementation 'org.robolectric:robolectric:4.4'
+  testImplementation 'androidx.arch.core:core-testing:2.1.0'
+  testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+  testImplementation "org.json:json:20200518"
+  testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 }
 
-apply from: rootProject.file('gradle/maven_push.gradle')
